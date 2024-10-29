@@ -73,9 +73,9 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 
-android/*
-ios/*
-.vscode/*
-linux/*
-macos/*
-windows/*
+/android
+/ios
+/.vscode
+/linux
+/macos
+/windows
