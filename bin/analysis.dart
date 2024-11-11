@@ -104,7 +104,10 @@ void playGamesInBatch(List<dynamic> args) {
     }
 
     List<int> playerCards = game.players.map((p) => p.matchedCards.length ~/ 2).toList();
-    final winnerIndex = playerCards.indexOf(playerCards.reduce((a, b) => a > b ? a : b));
+    int winnerIndex = playerCards.indexOf(playerCards.reduce((a, b) => a > b ? a : b));
+    if (playerCards.every((element) => element == playerCards[0])) {
+      winnerIndex = -1;
+    }
     List<dynamic> result = [winnerIndex, gameLength];
 
     // Append turns and cards for each player dynamically
@@ -122,7 +125,7 @@ Future<void> writeResultsToCsv(List<List<dynamic>> csvData, String fileName) asy
   String csv = const ListToCsvConverter().convert(csvData);
 
   // Write the CSV to a file with the provided name
-  final file = File('assets/results/$fileName.csv');
+  final file = File('assets/data/results/$fileName.csv');
   await file.writeAsString(csv);
 }
 
@@ -151,13 +154,13 @@ List<Map<String, dynamic>> gameOptionsWithName = [
   //   ],
   // },
 
-  {
-    'name': 'random_random',
-    'options': [
-      PlayerOptions(memoryChance: 0, useOptimalStrategy: true),
-      PlayerOptions(memoryChance: 0, useOptimalStrategy: true),
-    ],
-  },
+  // {
+  //   'name': 'random_random',
+  //   'options': [
+  //     PlayerOptions(memoryChance: 0, useOptimalStrategy: true),
+  //     PlayerOptions(memoryChance: 0, useOptimalStrategy: true),
+  //   ],
+  // },
 
   // {
   //   'name': 'nostrategy_nostrategy',
